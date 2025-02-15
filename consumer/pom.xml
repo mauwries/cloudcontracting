@@ -18,14 +18,14 @@
     </properties>
 
     <distributionManagement>
-        <repository>
-            <id>nfi-release</id>
-            <url>https://repo.nfi.minjus.nl/repository/mvn-nfi-release</url>
-        </repository>
-        <snapshotRepository>
-            <id>maven-iv-snapshot</id>
-            <url>https://repo.nfi.minjus.nl/repository/mvn-nfi-snapshot</url>
-        </snapshotRepository>
+<!--        <repository>-->
+<!--            <id>nfi-release</id>-->
+<!--            <url>https://repo.nfi.minjus.nl/repository/mvn-nfi-release</url>-->
+<!--        </repository>-->
+<!--        <snapshotRepository>-->
+<!--            <id>maven-iv-snapshot</id>-->
+<!--            <url>https://repo.nfi.minjus.nl/repository/mvn-nfi-snapshot</url>-->
+<!--        </snapshotRepository>-->
     </distributionManagement>
 
     <dependencies>
