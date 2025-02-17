@@ -1,37 +1,28 @@
 package nl.nfi.sandbox.cloudcontract.consumer.api.v1;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+
+import nl.nfi.sandbox.cloudcontract.consumer.client.ProfileDTO;
+import nl.nfi.sandbox.cloudcontract.consumer.client.RestClient;
 
 @RestController
-@RequestMapping("api/v1/profile")
+@RequestMapping("api/v1")
 public class ConsumerController {
 
-    private final RestTemplate restTemplate;
+    private final RestClient restClient;
 
-    public ConsumerController(final RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
+    public ConsumerController(final RestClient restClient) {
+        this.restClient = restClient;
     }
 
-    @GetMapping("/someEndpoint")
-    public String checkOddAndEven(@RequestParam("number") Integer number) {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Content-Type", "application/json");
-
-        ResponseEntity<String> responseEntity = restTemplate.exchange(
-            "http://localhost:8090/validate/prime-number?number=" + number,
-            HttpMethod.GET,
-            new HttpEntity<>(httpHeaders),
-            String.class);
-
-        return responseEntity.getBody();
+    @GetMapping(value = "/someEndpoint/{sin}", produces = APPLICATION_JSON_VALUE)
+    public ProfileDTO getProfileBySin(@PathVariable("sin") final String sin) {
+        final ProfileDTO profile = restClient.getProfile(sin);
+        return profile;
     }
 }
